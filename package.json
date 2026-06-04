@@ -1,0 +1,19 @@
+{
+  "name": "rebornbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "minecraft/index.js",
+  "scripts": {
+    "start": "node minecraft/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "mineflayer": "^4.33.0",
+    "mineflayer-pathfinder": "^2.4.5",
+    "ws": "^8.19.0"
+  }
+}

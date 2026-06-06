@@ -428,6 +428,44 @@ function sendFTopEmbed() {
     ftopChannel.send({ embeds: [embed] }).catch(console.error);
 }
 
+function isWallTimerRunning() {
+    return timerRunning;
+}
+
+function startWallTimer() {
+    if (timerRunning) return false;
+    startTimer(sendWall);
+    timerRunning = true;
+    return true;
+}
+
+function stopWallTimer() {
+    if (!timerRunning) return false;
+    stopTimer();
+    timerRunning = false;
+    return true;
+}
+
+function isFtopRunning() {
+    return ftopInterval !== null;
+}
+
+function startFtop() {
+    if (ftopInterval) return false;
+    runFTop();
+    ftopInterval = setInterval(() => {
+        runFTop();
+    }, 60 * 60 * 1000);
+    return true;
+}
+
+function stopFtop() {
+    if (!ftopInterval) return false;
+    clearInterval(ftopInterval);
+    ftopInterval = null;
+    return true;
+}
+
 client.on('messageCreate', async message => {
     // Ignore bot messages
     if (message.author.bot) return;
@@ -461,24 +499,20 @@ client.on('messageCreate', async message => {
 
     // ---- START WALL TIMER COMMAND ----
     if (message.content.toLowerCase() === '!start') {
-        if (timerRunning) {
+        if (startWallTimer()) {
+            return message.reply("Wall timer started.");
+        } else {
             return message.reply("⏱Wall timer is already running.");
         }
-    
-        startTimer(sendWall);
-        timerRunning = true;
-        return message.reply("Wall timer started.");
     }
 
     // ---- STOP WALL TIMER COMMAND ----
     if (message.content.toLowerCase() === '!stop') {
-        if (!timerRunning) {
+        if (stopWallTimer()) {
+            return message.reply("Wall timer stopped.");
+        } else {
             return message.reply("Wall timer is not running.");
         }
-    
-        stopTimer();
-        timerRunning = false;
-        return message.reply("Wall timer stopped.");
     }
 
     // ---- RAID BAG COMMAND ----
@@ -779,31 +813,20 @@ client.on('messageCreate', async message => {
 
     // ---- FTOP START ----
     if (message.content.toLowerCase() === '!ftop') {
-        if (ftopInterval) {
+        if (startFtop()) {
+            return message.reply("Starting f top data tracker (updates every hour).");
+        } else {
             return message.reply("Ftop already running.");
         }
-
-        message.reply("Starting f top data tracker (updates every hour).");
-
-        runFTop();
-
-        ftopInterval = setInterval(() => {
-            runFTop();
-        }, 60 * 60 * 1000); // every hour
-
-        return;
     }
 
     // ---- FTOP STOP ----
     if (message.content.toLowerCase() === '!ftopstop') {
-        if (!ftopInterval) {
+        if (stopFtop()) {
+            return message.reply("Stopped f top data tracker.");
+        } else {
             return message.reply("Ftop is not running.");
         }
-
-        clearInterval(ftopInterval);
-        ftopInterval = null;
-
-        return message.reply("Stopped f top data tracker.");
     }
 
     // ---- STATS COMMAND ----
@@ -963,5 +986,11 @@ module.exports = {
     listDiscordGuilds,
     listDiscordChannels,
     reloadDiscordFromConfig,
-    unlinkByMC
+    unlinkByMC,
+    startFtop,
+    stopFtop,
+    isFtopRunning,
+    startWallTimer,
+    stopWallTimer,
+    isWallTimerRunning
 };

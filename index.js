@@ -1,15 +1,15 @@
 console.log("Starting bot...");
 
-const { botEvents, humanChat } = require('./mc');
-const { startTimer, handleCheck } = require('./wallcheck');
-const { sendChat, sendWall, sendWeeWoo, sendWallCheckLog } = require('./discord');
-const { startDashboard } = require('./dashboard');
-const { generateCode, linkMC, isLinked } = require('./link');
-const { triggerWeewoo } = require('./weewoo');
-const { handleLCommand } = require('./funny');
-const { handlePayment } = require('./tax');
-const { handleOutpostMessage } = require('./raidoutpost');
-const { getConfig } = require('./config');
+const { botEvents, humanChat } = require('./events/mc');
+const { startTimer, handleCheck } = require('./functions/wallcheck');
+const { sendChat, sendWall, sendWeeWoo, sendWallCheckLog } = require('./events/discord');
+const { startDashboard } = require('./functions/dashboard');
+const { generateCode, linkMC, isLinked } = require('./commands/link');
+const { triggerWeewoo } = require('./commands/weewoo');
+const { handleLCommand } = require('./commands/funny');
+const { handlePayment } = require('./commands/tax');
+const { handleOutpostMessage } = require('./events/raidoutpost');
+const { getConfig } = require('./functions/config');
 require('dotenv').config();
 
 startDashboard();

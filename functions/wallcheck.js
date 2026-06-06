@@ -1,5 +1,5 @@
-const { bot, humanChat } = require('./mc');
-const { incrementChecks, getChecks, getRaidChecks } = require('./link');
+const { bot, humanChat } = require('../events/mc');
+const { incrementChecks, getChecks, getRaidChecks } = require('../commands/link');
 const { EmbedBuilder } = require('discord.js');
 const { getConfig } = require('./config');
 

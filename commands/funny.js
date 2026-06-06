@@ -1,4 +1,4 @@
-const { bot, humanChat } = require('./mc');
+const { bot, humanChat } = require('../events/mc');
 
 // Array of funny L variations
 const L_VARIATIONS = [

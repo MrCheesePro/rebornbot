@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const HISTORY_PATH = path.join(__dirname, 'ftop_history.json');
+const HISTORY_PATH = path.join(__dirname, '../database/ftop_history.json');
 
 let history = [];
 

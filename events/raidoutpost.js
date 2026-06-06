@@ -1,7 +1,7 @@
-const { startTimer, stopTimer } = require('./wallcheck');
+const { startTimer, stopTimer } = require('../functions/wallcheck');
 const { sendWall } = require('./discord');
-const { getConfig } = require('./config');
-const { getTopSessionRaidCheckers, resetTotalRaidChecks } = require('./link');
+const { getConfig } = require('../functions/config');
+const { getTopSessionRaidCheckers, resetTotalRaidChecks } = require('../commands/link');
 const { EmbedBuilder } = require('discord.js');
 
 let isTargetFactionHolding = false;

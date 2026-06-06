@@ -13,7 +13,7 @@ const {
     startWallTimer,
     stopWallTimer,
     isWallTimerRunning
-} = require('./discord');
+} = require('../events/discord');
 
 function readJsonBody(req) {
     return new Promise((resolve, reject) => {
@@ -944,7 +944,7 @@ function renderDashboardPage() {
 
 async function handleApi(req, res, url) {
     if (req.method === 'GET' && url.pathname === '/api/status') {
-        const mc = require('./mc');
+        const mc = require('../events/mc');
         const isBotConnected = mc.bot && mc.bot._client && mc.bot._client.state === 'play';
 
         sendJson(res, 200, {
@@ -965,7 +965,7 @@ async function handleApi(req, res, url) {
         try {
             const body = await readJsonBody(req);
             const { message } = body;
-            const mc = require('./mc');
+            const mc = require('../events/mc');
             
             if (!mc.bot) throw new Error('Minecraft bot is not connected.');
             mc.humanChat(message);
@@ -1036,7 +1036,7 @@ async function handleApi(req, res, url) {
     }
 
     if (req.method === 'GET' && url.pathname === '/api/links') {
-        const { getAllLinks } = require('./link');
+        const { getAllLinks } = require('../commands/link');
         const linksData = getAllLinks();
         // Format them as an array of objects
         const links = Object.keys(linksData).map(code => ({
@@ -1049,7 +1049,7 @@ async function handleApi(req, res, url) {
     }
 
     if (req.method === 'DELETE' && url.pathname.startsWith('/api/links/')) {
-        const { unlinkDiscord } = require('./link');
+        const { unlinkDiscord } = require('../commands/link');
         const discordId = url.pathname.split('/').pop();
         if (unlinkDiscord(discordId)) {
             sendJson(res, 200, { ok: true });
@@ -1111,3 +1111,4 @@ function startDashboard() {
 }
 
 module.exports = { startDashboard };
+ };

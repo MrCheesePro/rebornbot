@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 let links = {};
-const LINKS_PATH = path.join(__dirname, 'links.json');
+const LINKS_PATH = path.join(__dirname, '../database/links.json');
 
 // Load existing links from file at startup
 try {
@@ -155,7 +155,7 @@ function changeIGN(discordId, newIGN) {
 
 function resetAllChecks() {
     const backupName = `links_backup_${Date.now()}.json`;
-    const backupPath = path.join(__dirname, backupName);
+    const backupPath = path.join(__dirname, '../database/', backupName);
     
     // Save current state to a backup file
     fs.writeFileSync(backupPath, JSON.stringify(links, null, 2));
@@ -173,7 +173,7 @@ function resetAllChecks() {
 
 function resetRaidChecks() {
     const backupName = `links_raid_backup_${Date.now()}.json`;
-    const backupPath = path.join(__dirname, backupName);
+    const backupPath = path.join(__dirname, '../database/', backupName);
     
     // Save current state to a backup file
     fs.writeFileSync(backupPath, JSON.stringify(links, null, 2));
@@ -191,7 +191,7 @@ function resetRaidChecks() {
 
 function resetTotalRaidChecks() {
     const backupName = `links_total_raid_backup_${Date.now()}.json`;
-    const backupPath = path.join(__dirname, backupName);
+    const backupPath = path.join(__dirname, '../database/', backupName);
     
     // Save current state to a backup file
     fs.writeFileSync(backupPath, JSON.stringify(links, null, 2));

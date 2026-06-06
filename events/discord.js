@@ -1,10 +1,10 @@
 const { Client, GatewayIntentBits, EmbedBuilder, PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { generateCode, getLinkedMC, getLeaderboard, unlinkDiscord, changeIGN, resetAllChecks, resetRaidChecks, getAllLinks, unlinkByMC } = require('./link'); // <- import it from link.js
-const { startTimer, stopTimer, WALL_CHECK_ROLE_ID } = require('./wallcheck');
-const { startTax, stopTax, handlePayment } = require('./tax');
-const { triggerWeewoo } = require('./weewoo');
+const { generateCode, getLinkedMC, getLeaderboard, unlinkDiscord, changeIGN, resetAllChecks, resetRaidChecks, getAllLinks, unlinkByMC } = require('../commands/link'); 
+const { startTimer, stopTimer, WALL_CHECK_ROLE_ID } = require('../functions/wallcheck');
+const { startTax, stopTax, handlePayment } = require('../commands/tax');
+const { triggerWeewoo } = require('../commands/weewoo');
 const mc = require('./mc');
-const { getConfig } = require('./config');
+const { getConfig } = require('../functions/config');
 const fs = require('fs');
 const path = require('path');
 
@@ -693,7 +693,7 @@ client.on('messageCreate', async message => {
         collector.on('collect', async () => {
             try {
                 const backupFileName = resetAllChecks();
-                const backupPath = path.join(__dirname, backupFileName);
+                const backupPath = path.join(__dirname, '../database/', backupFileName);
 
                 await message.reply({
                     content: `✅ All wall checks reset to 0.`,

@@ -1,6 +1,6 @@
 const mineflayer = require('mineflayer');
 const EventEmitter = require('events');
-const { addLog } = require('./runtime');
+const { addLog } = require('../functions/runtime');
 
 let bot;
 let reconnectTimeout = null;

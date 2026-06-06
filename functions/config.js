@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
-const CONFIG_PATH = path.join(__dirname, 'bot-config.json');
+const CONFIG_PATH = path.join(__dirname, '../database/bot-config.json');
 
 const DEFAULT_CONFIG = {
     web: {

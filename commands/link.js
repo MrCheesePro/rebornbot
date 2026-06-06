@@ -157,6 +157,11 @@ function resetAllChecks() {
     const backupName = `links_backup_${Date.now()}.json`;
     const backupPath = path.join(__dirname, '../database/', backupName);
     
+    const dbDir = path.dirname(backupPath);
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+    }
+
     // Save current state to a backup file
     fs.writeFileSync(backupPath, JSON.stringify(links, null, 2));
 
@@ -175,6 +180,11 @@ function resetRaidChecks() {
     const backupName = `links_raid_backup_${Date.now()}.json`;
     const backupPath = path.join(__dirname, '../database/', backupName);
     
+    const dbDir = path.dirname(backupPath);
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+    }
+
     // Save current state to a backup file
     fs.writeFileSync(backupPath, JSON.stringify(links, null, 2));
 
@@ -193,6 +203,11 @@ function resetTotalRaidChecks() {
     const backupName = `links_total_raid_backup_${Date.now()}.json`;
     const backupPath = path.join(__dirname, '../database/', backupName);
     
+    const dbDir = path.dirname(backupPath);
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+    }
+
     // Save current state to a backup file
     fs.writeFileSync(backupPath, JSON.stringify(links, null, 2));
 
@@ -209,6 +224,10 @@ function resetTotalRaidChecks() {
 
 // Save links to disk
 function save() {
+    const dbDir = path.dirname(LINKS_PATH);
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+    }
     fs.writeFileSync(LINKS_PATH, JSON.stringify(links, null, 2));
 }
 

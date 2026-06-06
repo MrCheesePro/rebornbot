@@ -17,6 +17,10 @@ try {
 }
 
 function saveHistory() {
+    const dbDir = path.dirname(HISTORY_PATH);
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+    }
     fs.writeFileSync(HISTORY_PATH, JSON.stringify(history, null, 2));
 }
 

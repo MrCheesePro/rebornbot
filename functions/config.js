@@ -101,12 +101,20 @@ function loadConfig() {
         return normalizeConfig(JSON.parse(raw));
     } catch (error) {
         const defaults = normalizeConfig(DEFAULT_CONFIG);
+        const dbDir = path.dirname(CONFIG_PATH);
+        if (!fs.existsSync(dbDir)) {
+            fs.mkdirSync(dbDir, { recursive: true });
+        }
         fs.writeFileSync(CONFIG_PATH, JSON.stringify(defaults, null, 2));
         return defaults;
     }
 }
 
 function saveConfig() {
+    const dbDir = path.dirname(CONFIG_PATH);
+    if (!fs.existsSync(dbDir)) {
+        fs.mkdirSync(dbDir, { recursive: true });
+    }
     fs.writeFileSync(CONFIG_PATH, JSON.stringify(cachedConfig, null, 2));
 }
 
